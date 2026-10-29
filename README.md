@@ -1,18 +1,27 @@
-Hotel Booking Database – SQLite
+# Hotel Booking Database – SQLite
+
+**A Relational Database Design Project | Harvard's CS50 SQL**
+
 By Sadanand Mogaveera
 
-Video overview: https://youtu.be/dTj4jIla86Q
+**Video Overview:** https://youtu.be/dTj4jIla86Q
+
+## Project Overview
+
+This project focuses on designing a simplified hotel booking database using SQLite. It models the relationships between users, hotels, bookings, and reviews while demonstrating core relational database concepts such as entities, relationships, constraints, and query optimization.
+
+The database is designed to represent a simplified real-world hotel booking system where users can browse hotels, make bookings, and leave reviews based on their experiences.
 
 ## Scope
 
-The database for this project is designed  a simplified hotel booking system. It includes all entities necessary to allow users to browse hotels, make bookings, and leave reviews based on their experiences. The goal of this database is to model a real-world booking system while focusing on core relational database concepts such as entities, relationships, and constraints.
+The database for this project is designed for a simplified hotel booking system. It includes all entities necessary to allow users to browse hotels, make bookings, and leave reviews based on their experiences. The goal of this database is to model a real-world booking system while focusing on core relational database concepts such as entities, relationships, and constraints.
 
 As such, included in the database's scope is:
 
-* Users, including basic identifying information such as their name
-* Hotels, including details such as title, location, and price
-* Bookings, including the association between users and hotels along with check-in and check-out dates
-* Reviews, including user feedback in the form of comments and ratings
+- Users, including basic identifying information such as their name
+- Hotels, including details such as title, location, and price
+- Bookings, including the association between users and hotels along with check-in and check-out dates
+- Reviews, including user feedback in the form of comments and ratings
 
 Out of scope are elements such as payment processing, authentication systems, availability tracking, and administrative controls. These features are intentionally excluded to keep the project focused on database design fundamentals.
 
@@ -20,11 +29,11 @@ Out of scope are elements such as payment processing, authentication systems, av
 
 This database will support:
 
-* CRUD operations for users and hotels
-* Creating bookings that link users with hotels
-* Storing check-in and check-out dates for each booking
-* Allowing users to leave reviews with ratings and comments
-* Retrieving bookings and reviews using relational queries
+- CRUD operations for users and hotels
+- Creating bookings that link users with hotels
+- Storing check-in and check-out dates for each booking
+- Allowing users to leave reviews with ratings and comments
+- Retrieving bookings and reviews using relational queries
 
 Note that in this iteration, the system will not support authentication, payment systems, or real-time booking availability checks.
 
@@ -40,8 +49,8 @@ The database includes the following entities:
 
 The `users` table includes:
 
-* `id`, which specifies the unique ID for each user as an `INTEGER`. This column has the `PRIMARY KEY` constraint applied.
-* `name`, which specifies the user's name as `TEXT`. This column is required and thus has the `NOT NULL` constraint applied.
+- `id`, which specifies the unique ID for each user as an `INTEGER`. This column has the `PRIMARY KEY` constraint applied.
+- `name`, which specifies the user's name as `TEXT`. This column is required and thus has the `NOT NULL` constraint applied.
 
 This design ensures that each user is uniquely identifiable while keeping the structure simple.
 
@@ -49,10 +58,10 @@ This design ensures that each user is uniquely identifiable while keeping the st
 
 The `hotels` table includes:
 
-* `id`, which specifies the unique ID for each hotel as an `INTEGER`, with the `PRIMARY KEY` constraint applied.
-* `title`, which specifies the hotel’s name as `TEXT`.
-* `location`, which specifies the hotel’s location as `TEXT`.
-* `price`, which specifies the hotel’s price as an `INTEGER`.
+- `id`, which specifies the unique ID for each hotel as an `INTEGER`, with the `PRIMARY KEY` constraint applied.
+- `title`, which specifies the hotel's name as `TEXT`.
+- `location`, which specifies the hotel's location as `TEXT`.
+- `price`, which specifies the hotel's price as an `INTEGER`.
 
 All columns are required and have the `NOT NULL` constraint applied. This ensures that no incomplete hotel records can be stored.
 
@@ -60,11 +69,11 @@ All columns are required and have the `NOT NULL` constraint applied. This ensure
 
 The `bookings` table includes:
 
-* `id`, which specifies the unique ID for each booking as an `INTEGER`, with the `PRIMARY KEY` constraint applied.
-* `user_id`, which specifies the ID of the user making the booking as an `INTEGER`. This column has a `FOREIGN KEY` constraint referencing `users(id)`.
-* `hotel_id`, which specifies the ID of the hotel being booked as an `INTEGER`. This column has a `FOREIGN KEY` constraint referencing `hotels(id)`.
-* `check_in`, which specifies the check-in date as `DATE`.
-* `check_out`, which specifies the check-out date as `DATE`.
+- `id`, which specifies the unique ID for each booking as an `INTEGER`, with the `PRIMARY KEY` constraint applied.
+- `user_id`, which specifies the ID of the user making the booking as an `INTEGER`. This column has a `FOREIGN KEY` constraint referencing `users(id)`.
+- `hotel_id`, which specifies the ID of the hotel being booked as an `INTEGER`. This column has a `FOREIGN KEY` constraint referencing `hotels(id)`.
+- `check_in`, which specifies the check-in date as `DATE`.
+- `check_out`, which specifies the check-out date as `DATE`.
 
 All columns are required and have the `NOT NULL` constraint applied. Additionally, a constraint ensures that the check-out date is always later than the check-in date, preventing invalid bookings.
 
@@ -72,12 +81,12 @@ All columns are required and have the `NOT NULL` constraint applied. Additionall
 
 The `reviews` table includes:
 
-* `id`, which specifies the unique ID for each review as an `INTEGER`, with the `PRIMARY KEY` constraint applied.
-* `user_id`, which specifies the ID of the user who wrote the review as an `INTEGER`, with a `FOREIGN KEY` constraint referencing `users(id)`.
-* `hotel_id`, which specifies the ID of the hotel being reviewed as an `INTEGER`, with a `FOREIGN KEY` constraint referencing `hotels(id)`.
-* `booking_id`, which specifies the ID of the booking associated with the review as an `INTEGER`, with a `FOREIGN KEY` constraint referencing `bookings(id)`.
-* `comment`, which stores the review content as `TEXT`.
-* `rating`, which stores the rating as an `INTEGER`.
+- `id`, which specifies the unique ID for each review as an `INTEGER`, with the `PRIMARY KEY` constraint applied.
+- `user_id`, which specifies the ID of the user who wrote the review as an `INTEGER`, with a `FOREIGN KEY` constraint referencing `users(id)`.
+- `hotel_id`, which specifies the ID of the hotel being reviewed as an `INTEGER`, with a `FOREIGN KEY` constraint referencing `hotels(id)`.
+- `booking_id`, which specifies the ID of the booking associated with the review as an `INTEGER`, with a `FOREIGN KEY` constraint referencing `bookings(id)`.
+- `comment`, which stores the review content as `TEXT`.
+- `rating`, which stores the rating as an `INTEGER`.
 
 A constraint ensures that the rating value is between 1 and 5. All necessary columns are required to maintain consistency and data integrity.
 
@@ -89,11 +98,11 @@ The below entity relationship diagram describes the relationships among the enti
 
 As detailed by the diagram:
 
-* A user can make zero to many bookings, while each booking is associated with exactly one user.
-* A hotel can have zero to many bookings, while each booking is associated with exactly one hotel.
-* A booking can have at most one review, and each review is associated with exactly one booking.
-* A user can write zero to many reviews, while each review is written by exactly one user.
-* A hotel can receive zero to many reviews, while each review is associated with exactly one hotel.
+- A user can make zero to many bookings, while each booking is associated with exactly one user.
+- A hotel can have zero to many bookings, while each booking is associated with exactly one hotel.
+- A booking can have at most one review, and each review is associated with exactly one booking.
+- A user can write zero to many reviews, while each review is written by exactly one user.
+- A hotel can receive zero to many reviews, while each review is associated with exactly one hotel.
 
 These relationships are enforced using foreign key constraints, ensuring that all data remains consistent and properly linked.
 
@@ -111,8 +120,4 @@ The current schema assumes a simplified booking system and has several limitatio
 
 The database does not support authentication or user security, meaning that user identity is not verified. It also does not handle payment processing or financial transactions, which would be necessary in a real-world system.
 
-Additionally, the database does not prevent overlapping bookings or track hotel availability, which could lead to unrealistic scenarios where multiple users book the same hotel for the same dates.
-
-The system also assumes that each booking can have only one review, whereas real-world systems may allow multiple reviews or updates.
-
-Despite these limitations, the database successfully demonstrates the core principles of relational database design, including entity modeling, relationships, constraints, and query optimization.
+Additionally, the database does not prevent
